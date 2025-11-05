@@ -1,7 +1,11 @@
+import Lanyard from '../../../Components/Lanyard'
+import Lanyard2 from '../../../Components/Lanyard2';
+
 const Index = () => {
     return (
         <>
-        <h1>Teste</h1>
+        {/* <Lanyard /> */}
+        <Lanyard2/>
         </>
     )
 }
