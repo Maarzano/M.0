@@ -1,11 +1,15 @@
-import Index from "./Pages/Sobre/Index/Index"
+import { ThemeProvider } from "styled-components"
+import { defaultTheme } from "./styles/theme"
+import { GlobalStyle } from "./styles/GlobalStyle"
+
+import Index from "./Pages/Sobre/Index/Index" 
 
 function App() {
-
   return (
-    <>
-    <Index/>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
+      <Index/>
+    </ThemeProvider>
   )
 }
 
