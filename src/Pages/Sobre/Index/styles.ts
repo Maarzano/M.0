@@ -11,3 +11,8 @@ export const Separação = styled.div`
     min-height: 100vh;
     width: 50vw;
 `
+
+export const LanyardWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+`
