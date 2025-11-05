@@ -151,7 +151,12 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     }
   }, [hovered, dragged]);
 
+
   useFrame((state, delta) => {
+    if (!fixed.current || !j1.current || !j2.current || !j3.current || !card.current || !band.current) {
+      return;
+    }
+
     if (dragged && typeof dragged !== 'boolean') {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -163,24 +168,46 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
         z: vec.z - dragged.z
       });
     }
-    if (fixed.current) {
-      [j1, j2].forEach(ref => {
-        if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
-        const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
-        ref.current.lerped.lerp(
-          ref.current.translation(),
-          delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
-        );
-      });
-      curve.points[0].copy(j3.current.translation());
-      curve.points[1].copy(j2.current.lerped);
-      curve.points[2].copy(j1.current.lerped);
-      curve.points[3].copy(fixed.current.translation());
-      band.current.geometry.setPoints(curve.getPoints(32));
-      ang.copy(card.current.angvel());
-      rot.copy(card.current.rotation());
-      card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+
+    if (!j1.current.lerped) {
+      const t1 = j1.current.translation();
+      if (isNaN(t1.x)) return;
+      j1.current.lerped = new THREE.Vector3().copy(t1);
     }
+    if (!j2.current.lerped) {
+      const t2 = j2.current.translation();
+      if (isNaN(t2.x)) return;
+      j2.current.lerped = new THREE.Vector3().copy(t2);
+    }
+
+    const tFixed = fixed.current.translation();
+    const tJ1 = j1.current.translation();
+    const tJ2 = j2.current.translation();
+    const tJ3 = j3.current.translation();
+
+    if (isNaN(tFixed.x) || isNaN(tJ1.x) || isNaN(tJ2.x) || isNaN(tJ3.x)) {
+      return;
+    }
+
+    [j1, j2].forEach((ref, index) => {
+      const t = index === 0 ? tJ1 : tJ2;
+      const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(t)));
+      ref.current.lerped.lerp(
+        t,
+        delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
+      );
+    });
+
+    curve.points[0].copy(tJ3);
+    curve.points[1].copy(j2.current.lerped);
+    curve.points[2].copy(j1.current.lerped);
+    curve.points[3].copy(tFixed);
+
+    band.current.geometry.setPoints(curve.getPoints(32)); 
+
+    ang.copy(card.current.angvel());
+    rot.copy(card.current.rotation());
+    card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
   });
 
   curve.curveType = 'chordal';
