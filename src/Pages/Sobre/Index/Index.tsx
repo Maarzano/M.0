@@ -13,7 +13,7 @@ const Index = () => {
             </Separação>
             <Separação>
                 <LanyardWrapper>
-                    <Lanyard2/>
+                    <Lanyard2 fov={18}/>
                 </LanyardWrapper>
             </Separação>
             <ScrollIcon/>

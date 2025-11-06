@@ -4,15 +4,15 @@ export const Wrapper = styled.div`
     display: flex;
     min-width: 100vw;
     min-height: 100vh;
-    position: relative
+    position: relative;
 `
 
 export const Separação = styled.div`
-    min-height: 100vh;
-    width: 50vw;
+    max-height: 100vh;
+    min-width: 50vw;
 `
 
 export const LanyardWrapper = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
 `
