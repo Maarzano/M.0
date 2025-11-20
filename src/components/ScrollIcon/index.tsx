@@ -1,9 +1,9 @@
-import { StyledWrapper } from './styles'
+import { StyledWrapper } from './styles.ts'
 
 const ScrollIcon = () => {
   return (
     <StyledWrapper>
-      <div className="scrolldown">
+      <div className="scrolldown cursor-target">
         <div className="chevrons">
           <div className="chevrondown" />
           <div className="chevrondown" />
