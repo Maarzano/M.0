@@ -16,6 +16,7 @@ interface ScrollRevealProps {
   wordAnimationEnd?: string;
   wordAnimationStart?: string;
   fontSize?: string;
+  textAlign?: string;
   stagger?: number;
 }
 
@@ -30,6 +31,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   wordAnimationEnd,
   wordAnimationStart = 'top bottom-=20%',
   fontSize = '',
+  textAlign = "left",
   stagger = 10
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
@@ -114,7 +116,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
   return (
     <StyledH2 ref={containerRef} className={containerClassName}>
-      <StyledP className={textClassName} size={fontSize}>
+      <StyledP className={textClassName} size={fontSize} textAlign={textAlign}>
         {splitText}
       </StyledP>
     </StyledH2>

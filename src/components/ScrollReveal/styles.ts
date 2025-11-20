@@ -12,8 +12,9 @@ export const StyledH2 = styled.h2.attrs(props => ({
 
 export const StyledP = styled.p.attrs(props => ({
   className: `scroll-reveal-text ${props.className}`
-}))<{ size: string }>`
+}))<{ size: string, textAlign: string }>`
   font-size: ${props => props.size};
   line-height: 1.5;
   font-weight: 600;
+  text-align: ${props => props.textAlign}
 `;
