@@ -22,7 +22,7 @@ function App() {
 
 const Wrapper = styled.div`
   width: 95vw;
-  margin: auto;
+  margin: 2rem auto 2rem auto;
 `
 const Temp = styled.div`
   width: 100%;
