@@ -5,11 +5,15 @@ import { GlobalStyle } from "./styles/GlobalStyle"
 import Index from "./Pages/Sobre/Index/Index" 
 import FraseDia from "./Pages/Sobre/FraseDia"
 import Apresentação from "./Pages/Sobre/Apresentação"
+import TargetCursor from "./components/TargetCursor"
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
+      <TargetCursor spinDuration={2}
+                    hideDefaultCursor={true}
+                    parallaxOn={true}/>
       <Wrapper>
         <Index/>
         <FraseDia/>
