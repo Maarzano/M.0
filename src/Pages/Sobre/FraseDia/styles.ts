@@ -8,6 +8,6 @@ export const Wrapper = styled.div`
     justify-content: center;
 
     div {
-        margin: 0.3rem;
+        margin: 0rem 19rem;
     }
 `;
