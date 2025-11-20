@@ -17,7 +17,6 @@ export const StyledWrapper = styled.div`
     border-radius: 50px;
     box-sizing: border-box;
     margin-bottom: 16px;
-    cursor: pointer;
   }
 
   .scrolldown::before {
