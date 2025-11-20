@@ -16,6 +16,7 @@ interface ScrollRevealProps {
   wordAnimationEnd?: string;
   wordAnimationStart?: string;
   fontSize?: string;
+  stagger?: number;
 }
 
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -28,7 +29,8 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   textClassName = '',
   wordAnimationEnd = 'bottom bottom',
   wordAnimationStart = 'top bottom-=20%',
-  fontSize = ''
+  fontSize = '',
+  stagger = 10
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
 
@@ -63,7 +65,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       {
         ease: 'none',
         opacity: 1,
-        stagger: 10,
+        stagger: stagger,
         scrollTrigger: {
           trigger: el,
           scroller,
@@ -81,7 +83,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         {
           ease: 'none',
           filter: 'blur(0px)',
-          stagger: 10,
+          stagger: stagger,
           scrollTrigger: {
             trigger: el,
             scroller,
@@ -96,7 +98,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength]);
+  }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength, stagger]);
 
   return (
     <StyledH2 ref={containerRef} className={containerClassName}>
