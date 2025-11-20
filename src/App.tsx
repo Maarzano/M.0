@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/GlobalStyle"
 
 import Index from "./Pages/Sobre/Index/Index" 
 import FraseDia from "./Pages/Sobre/FraseDia"
+import Apresentação from "./Pages/Sobre/Apresentação"
 
 function App() {
   return (
@@ -12,14 +13,20 @@ function App() {
       <Wrapper>
         <Index/>
         <FraseDia/>
+        <Apresentação/>
+        <Temp/>
       </Wrapper>
     </ThemeProvider>
   )
 }
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   width: 95vw;
   margin: auto;
+`
+const Temp = styled.div`
+  width: 100%;
+  height: 12rem;
 `
 
 export default App
