@@ -1,4 +1,4 @@
-import ScrollReveal from "../../../Components/ScrollReveal";
+import ScrollReveal from "../../../components/ScrollReveal";
 import { Wrapper } from "./styles";
 
 const FraseDia = () => {

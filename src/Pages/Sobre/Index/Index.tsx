@@ -1,4 +1,4 @@
-import ScrollIcon from "../../../Components/ScrollIcon";
+import ScrollIcon from "../../../components/ScrollIcon";
 import { Separação, Wrapper } from "./styles";
 
 const Index = () => {
