@@ -7,6 +7,6 @@ export const Wrapper = styled.div`
     justify-content: center;
 
     div {
-        margin: 0rem 19rem;
+        margin: 0rem 20rem;
     }
 `;
