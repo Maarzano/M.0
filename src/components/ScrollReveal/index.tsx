@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo, type ReactNode, type RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './styles.css';
+import { StyledH2, StyledP } from './styles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,35 +10,41 @@ interface ScrollRevealProps {
   scrollContainerRef?: RefObject<HTMLElement>;
   enableBlur?: boolean;
   baseOpacity?: number;
-  baseRotation?: number;
   blurStrength?: number;
   containerClassName?: string;
   textClassName?: string;
-  rotationEnd?: string;
   wordAnimationEnd?: string;
+  wordAnimationStart?: string;
+  fontSize?: string;
 }
 
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   scrollContainerRef,
-  enableBlur = true,
+  enableBlur = false,
   baseOpacity = 0.1,
-  baseRotation = 3,
   blurStrength = 4,
   containerClassName = '',
   textClassName = '',
-  rotationEnd = 'bottom bottom',
-  wordAnimationEnd = 'bottom bottom'
+  wordAnimationEnd = 'bottom bottom',
+  wordAnimationStart = 'top bottom-=20%',
+  fontSize = ''
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : '';
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
+    
+    return text.split(/(\s+)/).map((part, index) => {
+      if (part.match(/^\s+$/)) return ' ';
+
       return (
-        <span className="word" key={index}>
-          {word}
+        <span key={index} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          {part.split('').map((char, charIndex) => (
+            <span className="char" key={charIndex} style={{ display: 'inline-block' }}>
+              {char}
+            </span>
+          ))}
         </span>
       );
     });
@@ -49,36 +55,19 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     if (!el) return;
 
     const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+    const charElements = el.querySelectorAll<HTMLElement>('.char');
 
     gsap.fromTo(
-      el,
-      { transformOrigin: '0% 50%', rotate: baseRotation },
-      {
-        ease: 'none',
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: 'top bottom',
-          end: rotationEnd,
-          scrub: true
-        }
-      }
-    );
-
-    const wordElements = el.querySelectorAll<HTMLElement>('.word');
-
-    gsap.fromTo(
-      wordElements,
+      charElements,
       { opacity: baseOpacity, willChange: 'opacity' },
       {
         ease: 'none',
         opacity: 1,
-        stagger: 0.05,
+        stagger: 10,
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: 'top bottom-=20%',
+          start: wordAnimationStart,
           end: wordAnimationEnd,
           scrub: true
         }
@@ -87,16 +76,16 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
     if (enableBlur) {
       gsap.fromTo(
-        wordElements,
+        charElements,
         { filter: `blur(${blurStrength}px)` },
         {
           ease: 'none',
           filter: 'blur(0px)',
-          stagger: 0.05,
+          stagger: 10,
           scrollTrigger: {
             trigger: el,
             scroller,
-            start: 'top bottom-=20%',
+            start: wordAnimationStart,
             end: wordAnimationEnd,
             scrub: true
           }
@@ -107,12 +96,14 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
+  }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength]);
 
   return (
-    <h2 ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
-      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
-    </h2>
+    <StyledH2 ref={containerRef} className={containerClassName}>
+      <StyledP className={textClassName} size={fontSize}>
+        {splitText}
+      </StyledP>
+    </StyledH2>
   );
 };
 
