@@ -27,7 +27,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   blurStrength = 4,
   containerClassName = '',
   textClassName = '',
-  wordAnimationEnd = 'bottom bottom',
+  wordAnimationEnd,
   wordAnimationStart = 'top bottom-=20%',
   fontSize = '',
   stagger = 10
@@ -52,6 +52,18 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     });
   }, [children]);
 
+  const computedEnd = useMemo(() => {
+    if (wordAnimationEnd) return wordAnimationEnd;
+
+    const textLength = typeof children === 'string' ? children.length : 0;
+
+    if (textLength < 100) {
+      return '+=400'; 
+    } 
+    
+    return 'bottom bottom-=10%'; 
+  }, [children, wordAnimationEnd]);
+
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -70,7 +82,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           trigger: el,
           scroller,
           start: wordAnimationStart,
-          end: wordAnimationEnd,
+          end: computedEnd,
           scrub: true
         }
       }
@@ -88,7 +100,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
             trigger: el,
             scroller,
             start: wordAnimationStart,
-            end: wordAnimationEnd,
+            end: computedEnd,
             scrub: true
           }
         }
@@ -98,7 +110,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength, stagger]);
+  }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength, stagger, computedEnd]);
 
   return (
     <StyledH2 ref={containerRef} className={containerClassName}>
