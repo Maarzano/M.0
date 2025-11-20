@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo, type ReactNode, type RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './styles.css';
+import { StyledH2, StyledP } from './styles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +23,7 @@ interface ScrollRevealProps {
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   scrollContainerRef,
-  enableBlur = true,
+  enableBlur = false,
   baseOpacity = 0.1,
   baseRotation = 3,
   blurStrength = 4,
@@ -37,11 +37,17 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : '';
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
+    
+    return text.split(/(\s+)/).map((part, index) => {
+      if (part.match(/^\s+$/)) return ' ';
+
       return (
-        <span className="word" key={index}>
-          {word}
+        <span key={index} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          {part.split('').map((char, charIndex) => (
+            <span className="char" key={charIndex} style={{ display: 'inline-block' }}>
+              {char}
+            </span>
+          ))}
         </span>
       );
     });
@@ -52,6 +58,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     if (!el) return;
 
     const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+    const charElements = el.querySelectorAll<HTMLElement>('.char');
 
     gsap.fromTo(
       el,
@@ -77,7 +84,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       {
         ease: 'none',
         opacity: 1,
-        stagger: 0.05,
+        stagger: 10,
         scrollTrigger: {
           trigger: el,
           scroller,
@@ -90,12 +97,12 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
     if (enableBlur) {
       gsap.fromTo(
-        wordElements,
+        charElements,
         { filter: `blur(${blurStrength}px)` },
         {
           ease: 'none',
           filter: 'blur(0px)',
-          stagger: 0.05,
+          stagger: 10,
           scrollTrigger: {
             trigger: el,
             scroller,
