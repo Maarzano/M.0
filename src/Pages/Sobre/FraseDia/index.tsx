@@ -5,7 +5,7 @@ const FraseDia = () => {
     return (
         <Wrapper>
             <div>
-                <ScrollReveal fontSize="6rem">
+                <ScrollReveal fontSize="6rem" showQuotes>
                     {/*Essa frase virá de API, é apenas temporário */}
                     Coding is the art of building worlds from logic, passion, and imagination.
                 </ScrollReveal>
