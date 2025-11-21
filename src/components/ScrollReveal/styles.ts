@@ -14,22 +14,26 @@ export const StyledP = styled.p.attrs(props => ({
   className: `scroll-reveal-text ${props.className}`
 }))<{ size: string; textAlign: string; $showQuotes?: boolean }>`
   font-size: ${props => props.size};
-  line-height: 1.5;
+  line-height: 1.2;
   font-weight: 600;
   text-align: ${props => props.textAlign};
   
   position: relative;
   display: inline-block; 
-  padding: 0.2em 0.6em;
+  
+  padding: 0; 
 
   ${(props) => props.$showQuotes && css`
     &::before,
     &::after {
         content: "";
-        position: absolute;
-        width: 0.4em;
-        height: 0.4em; 
-        background-color: #9F35FF;
+        display: inline-block;
+        vertical-align: top;
+        
+        width: 0.9em;
+        height: 0.9em; 
+        
+        background-color: ${props => props.theme.colors.primary};
         
         mask-image: url("/public/svg/quote.svg");
         mask-repeat: no-repeat;
@@ -37,14 +41,15 @@ export const StyledP = styled.p.attrs(props => ({
     }
 
     &::before {
-        top: -0.1em;
-        left: -0.1em;
+        margin-right: 0.3em; 
+        
+        transform: translateY(0%); 
     }
 
     &::after {
-        bottom: -0.1em;
-        right: -0.1em;
-        transform: rotate(180deg);
+        margin-left: 0.1em; 
+        
+        transform: rotate(180deg) translateY(-45%); 
     }
   `}
 `;
