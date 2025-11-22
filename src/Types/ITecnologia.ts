@@ -1,4 +1,4 @@
-export interface Tecnologia {
+export interface ITecnologia {
     nome: string,
     descricao?: string,
     img: string

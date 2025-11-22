@@ -1,5 +1,5 @@
-import { EModalidadeCurso } from "../../Types/EModalidadeCurso";
-import type { Tecnologia } from "../../Types/Tecnologia";
+import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
+import type { ITecnologia } from "../../../Types/ITecnologia";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
 
 interface CardCertificadoProps {
@@ -10,7 +10,7 @@ interface CardCertificadoProps {
     modalidade: EModalidadeCurso;
     localizacao?: string;
     descricao: string;
-    tecnologias: Tecnologia[]
+    tecnologias: ITecnologia[]
 }
 const CardCertificado: React.FC<CardCertificadoProps> = ({
     titulo = "Curso sem Nome",
