@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 import type { ITecnologia } from "../../../Types/ITecnologia";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
+import { Wrapper } from "./styles";
 
 interface CardCertificadoProps {
     img?: string;
@@ -21,9 +23,8 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
     tecnologias = []
 }) => {
     return (
-        <p>
-            oie {titulo} {dataInicio.toString()} {dataFinal?.toString()} {descricao} {modalidade} {tecnologias[0]?.nome}
-        </p>
+        <Wrapper className="cursor-target">
+        </Wrapper>
     );
 
 }
