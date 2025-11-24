@@ -6,6 +6,7 @@ import Index from "./Pages/Sobre/Index/Index"
 import FraseDia from "./Pages/Sobre/FraseDia"
 import Apresentação from "./Pages/Sobre/Apresentação"
 import TargetCursor from "./components/TargetCursor"
+import FormacaoCertificado from "./Pages/Sobre/FormaçãoCertificados"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Index/>
         <FraseDia/>
         <Apresentação/>
+        <FormacaoCertificado/>
         <Temp/>
       </Wrapper>
     </ThemeProvider>
