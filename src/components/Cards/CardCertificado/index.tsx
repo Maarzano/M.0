@@ -24,6 +24,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
 }) => {
     return (
         <Wrapper className="cursor-target">
+            {titulo}
         </Wrapper>
     );
 
