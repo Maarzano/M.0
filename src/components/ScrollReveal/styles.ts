@@ -35,7 +35,7 @@ export const StyledP = styled.p.attrs(props => ({
         
         background-color: ${props => props.theme.colors.primary};
         
-        mask-image: url("/svg/quote.svg");
+        mask-image: url("/assets/svg/quote.svg");
         mask-repeat: no-repeat;
         mask-size: contain;
     }
