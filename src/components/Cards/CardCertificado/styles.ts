@@ -1,12 +1,78 @@
 import styled from "styled-components";
+import type { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 
 export const Wrapper = styled.div`
     width: 50rem;
-    height: 50rem;
-    border-radius: 10%;
+    height: 67rem;
+    border-radius: 3rem;
     background-color: ${props => props.theme.colors.background2};
-    //temporário:
+    padding: 0.78rem;
+`
+
+export const DivImg = styled.div<{ $background?: string }>`
+    width: 100%;
+    height: 35%;
+    background-color: ${props => props.$background};
+    border-radius: 3rem 3rem 3rem 3rem;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+`
+
+export const TituloCertificado = styled.h2`
+    margin: 0.5rem 0 0.7rem 2rem;
+    font-size: 3rem;
+    font-weight: 900;
+`
+
+export const DataInicioFim = styled.p`
+    text-align: end;
+    color: ${props => props.theme.colors.cinzaSecundario}
+`
+
+export const DivModalidade_Localização = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-left: 1.3rem;
+    margin-top: 0.5rem;
+`
+
+export const Modalidade = styled.div<{ $modalidade: EModalidadeCurso}>`
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 0.9rem;
+    font-size: 1.6rem;
+
+    img {
+        width: 1.7rem;
+        height: 1.7rem;
+        object-fit: contain;
+    }
+`
+export const LocalizacaoContainer = styled.div`
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 0.9rem;
+    font-size: 1.6rem;
+
+    img {
+        width: 1.7rem;
+        height: 1.7rem;
+        object-fit: contain;
+    }
+`
+
+export const DivDescricao = styled.div`
+    overflow-y: hidden;
+    overflow-x: auto;
+    text-align: left;
+    margin: 1.5rem 2rem 1rem 2rem;
+    font-size: 2rem;
+    color: ${props => props.theme.colors.cinzaSecundario}
 `
