@@ -1,5 +1,5 @@
 export enum EModalidadeCurso {
-    ONLINE,
-    PRESENCIAL,
-    HIBRIDA
+    ONLINE = "Online",
+    PRESENCIAL = "Presencial",
+    HIBRIDA = "Híbrida"
 }
