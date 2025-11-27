@@ -6,15 +6,15 @@ import type { IImg } from "../../../Types/IImg";
 import type { ITecnologia } from "../../../Types/ITecnologia";
 import { formatarDataMesAno } from "../../../utils/Datas";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
-import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
-import LogoLoop, { type LogoItem } from '../../LogoLoop/1'; 
+import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, Expandir, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
+import LogoLoop, { type LogoItem } from '../../LogoLoop/1';
 
 interface CardCertificadoProps {
     img: IImg;
     titulo: string;
     dataInicio: Date;
     dataFinal?: Date;
-    modalidade: EModalidadeCurso;
+    modalidade?: EModalidadeCurso;
     localizacao?: string;
     descricao: string;
     tecnologias: ITecnologia[]
@@ -89,10 +89,15 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                         fadeOut={true}
                         fadeOutColor='#1B1A1C'
                         ariaLabel="Tecnologias utilizadas"
+                        draggable
                     />
                 </DivLogoLoop>
             )}
-            
+
+            <Expandir className='Expandir'>
+                Expandir
+                <img src='/public/assets/svg/arrow.svg'/>
+            </Expandir>
         </Wrapper>
     );
 }

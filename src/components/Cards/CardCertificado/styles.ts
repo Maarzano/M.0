@@ -7,6 +7,20 @@ export const Wrapper = styled.div`
     background-color: ${props => props.theme.colors.background2};
     padding: 0.78rem;
     overflow: hidden;
+    &:hover {
+        .Expandir {
+            color: ${props => props.theme.colors.textToB1};;
+            transform: scale(1.05);
+        }
+
+        .Expandir::after {
+            width: 100%;
+        }
+
+        .Expandir img {
+            filter: brightness(0) invert(1);
+        }
+    }
 `
 
 export const DivImg = styled.div<{ $background?: string }>`
@@ -70,4 +84,26 @@ export const DivLogoLoop = styled.div`
     padding-top: 16px;
     width: 100%;
     overflow: hidden;
+`
+
+export const Expandir = styled.div`
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.3rem;
+    
+    width: 100%;
+    padding-right: 1.5rem;
+    margin-top: 2.5rem; 
+
+    font-size: 1.9rem;
+    color: ${props => props.theme.colors.cinzaSecundario};
+
+    img {
+        width: 2.2rem;
+        height: 2.2rem;
+        object-fit: contain;
+        transition: filter 0.3s ease-in-out;
+    }
 `
