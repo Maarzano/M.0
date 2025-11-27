@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useMemo } from 'react';
 import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 import type { IImg } from "../../../Types/IImg";
 import type { ITecnologia } from "../../../Types/ITecnologia";
 import { formatarDataMesAno } from "../../../utils/Datas";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
-import { DataInicioFim, DivDescricao, DivImg, DivModalidade_Localização, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
+import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
+import LogoLoop, { type LogoItem } from '../../LogoLoop/1'; 
 
 interface CardCertificadoProps {
     img: IImg;
@@ -33,6 +36,15 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
         modalidade === EModalidadeCurso.PRESENCIAL
             ? "/public/assets/svg/presencialIcon.svg"
             : "/public/assets/svg/OnlineIcon.svg";
+
+    const techLogos: LogoItem[] = useMemo(() => {
+        return tecnologias.map((tech) => ({
+            src: tech.img,
+            alt: tech.nome,
+            title: tech.nome,
+        }));
+    }, [tecnologias]);
+
     return (
         <Wrapper className="cursor-target">
             <DivImg $background={img.background}>
@@ -63,6 +75,23 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
             <DivDescricao>
                 {descricao.toString()}
             </DivDescricao>
+
+            {techLogos.length > 0 && (
+                <DivLogoLoop>
+                    <LogoLoop 
+                        logos={techLogos}
+                        speed={35}
+                        scaleOnHover
+                        logoHeight={50}
+                        gap={30}
+                        direction="left"
+                        pauseOnHover={true}
+                        fadeOut={true}
+                        fadeOutColor='#1B1A1C'
+                        ariaLabel="Tecnologias utilizadas"
+                    />
+                </DivLogoLoop>
+            )}
             
         </Wrapper>
     );
