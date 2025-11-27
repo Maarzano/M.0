@@ -17,16 +17,16 @@ interface CardCertificadoProps {
     tecnologias: ITecnologia[]
 }
 const CardCertificado: React.FC<CardCertificadoProps> = ({
+    img = { 
+        imgSrc: "/public/assets/imgs/PlaceHolderImg1WHITE.png",
+    },
     titulo = "Curso sem Nome",
     dataInicio = new Date("06/01/2025"),
     dataFinal,
     modalidade = EModalidadeCurso.ONLINE,
     localizacao,
     descricao = PlaceHolderDescricaoCertificado,
-    tecnologias = [],
-    img = { 
-        imgSrc: "/public/assets/imgs/PlaceHolderImg1WHITE.png",
-    }
+    tecnologias = []
 }) => {
 
     const iconSrc =
@@ -45,9 +45,9 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                 {formatarDataMesAno(dataInicio)} - {dataFinal ? formatarDataMesAno(dataFinal) : 'Atualmente'}
             </DataInicioFim>
             <DivModalidade_Localização>
-                <Modalidade $modalidade={modalidade}>
-                <img src={iconSrc}/>
-                {modalidade.toString()}
+                <Modalidade>
+                    <img src={iconSrc}/>
+                    {modalidade.toString()}
                 </Modalidade>
                 {modalidade != EModalidadeCurso.ONLINE && (
                     <LocalizacaoContainer>
