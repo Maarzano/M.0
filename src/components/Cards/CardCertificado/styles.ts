@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import type { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 
 export const Wrapper = styled.div`
     width: 50rem;
@@ -13,7 +12,7 @@ export const DivImg = styled.div<{ $background?: string }>`
     width: 100%;
     height: 35%;
     background-color: ${props => props.$background};
-    border-radius: 3rem 3rem 3rem 3rem;
+    border-radius: 3rem;
 
     img {
         height: 100%;
@@ -30,7 +29,7 @@ export const TituloCertificado = styled.h2`
 
 export const DataInicioFim = styled.p`
     text-align: end;
-    color: ${props => props.theme.colors.cinzaSecundario}
+    color: ${props => props.theme.colors.cinzaSecundario};
 `
 
 export const DivModalidade_Localização = styled.div`
@@ -41,7 +40,7 @@ export const DivModalidade_Localização = styled.div`
     margin-top: 0.5rem;
 `
 
-export const Modalidade = styled.div<{ $modalidade: EModalidadeCurso}>`
+export const Modalidade = styled.div`
     display: flex;
     align-items: start;
     justify-content: start;
@@ -54,19 +53,7 @@ export const Modalidade = styled.div<{ $modalidade: EModalidadeCurso}>`
         object-fit: contain;
     }
 `
-export const LocalizacaoContainer = styled.div`
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    gap: 0.9rem;
-    font-size: 1.6rem;
-
-    img {
-        width: 1.7rem;
-        height: 1.7rem;
-        object-fit: contain;
-    }
-`
+export const LocalizacaoContainer = Modalidade;
 
 export const DivDescricao = styled.div`
     overflow-y: hidden;
