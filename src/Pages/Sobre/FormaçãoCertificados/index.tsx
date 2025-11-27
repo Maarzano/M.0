@@ -1,6 +1,7 @@
 import CardCertificado from "../../../components/Cards/CardCertificado";
 import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 import { Wrapper } from "./styles";
+import { techsComputacao } from "./techsComputacao";
 
 const FormacaoCertificado = () => {
     return (
@@ -12,7 +13,7 @@ const FormacaoCertificado = () => {
                 modalidade={EModalidadeCurso.PRESENCIAL}
                 localizacao="UNA - Aimorés"
                 descricao="Formação acadêmica robusta em Ciência da Computação com ênfase no desenvolvimento e gestão de soluções tecnológicas inovadoras. O currículo forneceu uma base sólida em Engenharia de Software, Estrutura de Dados e Algoritmos..."
-                tecnologias={[]} >
+                tecnologias={techsComputacao} >
                 
             </CardCertificado>
         </Wrapper>
