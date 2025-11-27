@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     border-radius: 3rem;
     background-color: ${props => props.theme.colors.background2};
     padding: 0.78rem;
+    overflow: hidden;
 `
 
 export const DivImg = styled.div<{ $background?: string }>`
@@ -61,5 +62,12 @@ export const DivDescricao = styled.div`
     text-align: left;
     margin: 1.5rem 2rem 1rem 2rem;
     font-size: 2rem;
-    color: ${props => props.theme.colors.cinzaSecundario}
+    color: ${props => props.theme.colors.cinzaSecundario};
+`
+
+export const DivLogoLoop = styled.div`
+    margin-top: auto;
+    padding-top: 16px;
+    width: 100%;
+    overflow: hidden;
 `
