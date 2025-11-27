@@ -14,7 +14,7 @@ function App() {
       <GlobalStyle />
       <TargetCursor spinDuration={2}
                     hideDefaultCursor={true}
-                    parallaxOn={true}/>
+                    parallaxOn={false}/>
       <Wrapper>
         <Index/>
         <FraseDia/>

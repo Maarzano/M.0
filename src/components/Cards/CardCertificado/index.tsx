@@ -7,7 +7,7 @@ import type { ITecnologia } from "../../../Types/ITecnologia";
 import { formatarDataMesAno } from "../../../utils/Datas";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
 import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, Expandir, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
-import LogoLoop, { type LogoItem } from '../../LogoLoop/1';
+import LogoLoop, { type LogoItem } from '../../LogoLoop';
 
 interface CardCertificadoProps {
     img: IImg;
