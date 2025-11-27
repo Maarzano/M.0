@@ -36,33 +36,36 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
     return (
         <Wrapper className="cursor-target">
             <DivImg $background={img.background}>
-                <img src={img.imgSrc}/>
+                <img src={img.imgSrc} alt={titulo} />
             </DivImg>
+            
             <TituloCertificado>
                 {titulo}
             </TituloCertificado>
+            
             <DataInicioFim>
                 {formatarDataMesAno(dataInicio)} - {dataFinal ? formatarDataMesAno(dataFinal) : 'Atualmente'}
             </DataInicioFim>
+            
             <DivModalidade_Localização>
                 <Modalidade>
-                    <img src={iconSrc}/>
+                    <img src={iconSrc} alt="Ícone modalidade" />
                     {modalidade.toString()}
                 </Modalidade>
-                {modalidade != EModalidadeCurso.ONLINE && (
+                {modalidade !== EModalidadeCurso.ONLINE && (
                     <LocalizacaoContainer>
                         <img src="/public/assets/svg/localizaçãoIcon.svg" alt="Localização" />
                         {localizacao}
                     </LocalizacaoContainer>
                 )}
             </DivModalidade_Localização>
+            
             <DivDescricao>
                 {descricao.toString()}
             </DivDescricao>
             
         </Wrapper>
     );
-
 }
 
 export default CardCertificado;
