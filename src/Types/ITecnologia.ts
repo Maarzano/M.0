@@ -1,5 +1,6 @@
 export interface ITecnologia {
     nome: string,
     descricao?: string,
-    img: string
+    img: string,
+    link?: string
 }
