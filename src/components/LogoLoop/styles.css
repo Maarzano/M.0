@@ -104,15 +104,18 @@
   text-decoration: none;
   border-radius: 4px;
   transition: opacity 0.2s ease;
+  cursor: none;
 }
 
 .logoloop__link:hover {
   opacity: 0.8;
+  cursor: none;
 }
 
 .logoloop__link:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;
+  cursor: none;
 }
 
 .logoloop--fade::before,
