@@ -8,6 +8,7 @@ import { formatarDataMesAno } from "../../../utils/Datas";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
 import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, Expandir, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
 import LogoLoop, { type LogoItem } from '../../LogoLoop';
+import ToolTipTab from '../../ToolTip';
 
 interface CardCertificadoProps {
     img: IImg;
@@ -45,6 +46,34 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
             href: tech.link,
         }));
     }, [tecnologias]);
+
+    const renderTechItem = (item: LogoItem) => {
+        const img = (
+            <img 
+                src={(item as any).src} 
+                alt={(item as any).alt} 
+                draggable={false}
+            />
+        );
+
+        const withTooltip = (
+            <ToolTipTab label={(item as any).title || ''} direction={"90px"}>
+                {img}
+            </ToolTipTab>
+        );
+
+        return (item as any).href ? (
+            <a 
+                href={(item as any).href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="logoloop__link" 
+                draggable={false}
+            >
+                {withTooltip}
+            </a>
+        ) : withTooltip;
+    };
 
     return (
         <Wrapper className="cursor-target">
@@ -91,6 +120,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                         fadeOutColor='#1B1A1C'
                         ariaLabel="Tecnologias utilizadas"
                         draggable
+                        renderItem={renderTechItem}
                     />
                 </DivLogoLoop>
             )}

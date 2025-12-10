@@ -82,8 +82,11 @@ export const DivDescricao = styled.div`
 export const DivLogoLoop = styled.div`
     margin-top: auto;
     padding-top: 16px;
+    padding-bottom: 120px;
+    margin-bottom: -120px;
     width: 100%;
     overflow: hidden;
+    position: relative;
 `
 
 export const Expandir = styled.div`
