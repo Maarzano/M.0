@@ -5,6 +5,7 @@ export const TabWrapper = styled.div<{direction: undefined | string | number}>`
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 
   &:hover span {
     opacity: 1;
@@ -12,18 +13,18 @@ export const TabWrapper = styled.div<{direction: undefined | string | number}>`
   }
 `;
 
-export const Tooltip = styled.span`
+export const Tooltip = styled.span<{bg: string | undefined, cor: string | undefined}>`
   position: absolute;
   bottom: 115%;
-  background-color: #000000;
-  color: #623bda;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 12px;
+  background-color: ${props => props.bg === undefined ? props.theme.colors.background : props.bg};
+  color: ${props => props.cor === undefined ? props.theme.colors.textToB1 : props.cor};
+  padding: 6px 11px;
+  border-radius: 7px;
+  font-size: 14px;
   white-space: nowrap;
   opacity: 0;
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
-  z-index: 10;
+  z-index: 9999;
 `;

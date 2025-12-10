@@ -3,14 +3,16 @@ import { TabWrapper, Tooltip } from "./styles";
 interface PropsToolTip {
     children: React.ReactNode;
     label: string;
-    direction?: number
+    direction?: number | string | undefined;
+    bg?: string;
+    cor?: string;
 }
 
-const ToolTipTab: React.FC<PropsToolTip> = ({ children, label, direction }) => {
+const ToolTipTab: React.FC<PropsToolTip> = ({ children, label, direction, bg, cor}) => {
   return (
     <TabWrapper direction={direction}>
       {children}
-      <Tooltip>{label}</Tooltip>
+      <Tooltip  bg={bg} cor={cor}>{label}</Tooltip>
     </TabWrapper>
   );
 };
