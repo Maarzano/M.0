@@ -42,6 +42,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
             src: tech.img,
             alt: tech.nome,
             title: tech.nome,
+            href: tech.link,
         }));
     }, [tecnologias]);
 
