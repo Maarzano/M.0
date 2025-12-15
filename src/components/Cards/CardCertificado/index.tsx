@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
 import type { IImg } from "../../../Types/IImg";
 import type { ITecnologia } from "../../../Types/ITecnologia";
@@ -75,13 +75,29 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
         ) : withTooltip;
     };
 
+    const tituloRef = useRef<HTMLHeadingElement>(null);
+    
+    const [linhasDescricao, setLinhasDescricao] = useState(3);
+
+    useLayoutEffect(() => {
+        if (tituloRef.current) {
+            const alturaTitulo = tituloRef.current.clientHeight;
+
+            if (alturaTitulo > 60) {
+                setLinhasDescricao(4);
+            } else {
+                setLinhasDescricao(5);
+            }
+        }
+    }, [titulo]);
+
     return (
         <Wrapper className="cursor-target">
             <DivImg $background={img.background}>
                 <img src={img.imgSrc} alt={titulo} />
             </DivImg>
             
-            <TituloCertificado>
+            <TituloCertificado ref={tituloRef}>
                 {titulo}
             </TituloCertificado>
             
@@ -102,7 +118,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                 )}
             </DivModalidade_Localização>
             
-            <DivDescricao>
+            <DivDescricao $linhas={linhasDescricao}>
                 {descricao.toString()}
             </DivDescricao>
 
