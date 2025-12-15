@@ -9,15 +9,15 @@ export const certificadosMock = [
     dataInicio: new Date("05/21/2025"),
     modalidade: EModalidadeCurso.PRESENCIAL,
     localizacao: "UNA - Aimorés",
-    descricao: "Formação acadêmica robusta em Ciência da Computação com ênfase no desenvolvimento e gestão de soluções tecnológicas inovadoras. O currículo forneceu uma base sólida em Engenharia de Software, Estrutura de Dados e Algoritmos...",
+    descricao: "Formação acadêmica robusta em Ciência da Computação com ênfase no desenvolvimento e gestão de soluções tecnológicas inovadoras. O currículo forneceu uma base sólida em Engenharia de Software, Estrutura de Dados e Algoritmos.",
     tecnologias: techsComputacao
   },
   {
     id: 2,
     titulo: "Desenvolvimento de Sistemas",
     img: { imgSrc: "/assets/imgs/SenaiIcon.png", background: "#FF0000" },
-    dataInicio: new Date("11/03/2024"),
-    dataFinal: new Date("17/08/2025"),
+    dataInicio: new Date("03/11/2024"),
+    dataFinal: new Date("08/17/2025"),
     modalidade: EModalidadeCurso.PRESENCIAL,
     localizacao: "SENAI - CTTI",
     descricao: "Formação técnica em Desenvolvimento de Sistemas pelo SENAI, com foco na criação de soluções de software escaláveis e alinhadas às tecnologias utilizadas no mercado, proporcionando base sólida em lógica de programação, desenvolvimento de aplicações e boas práticas de engenharia de software.",
