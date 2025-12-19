@@ -1,5 +1,6 @@
 import type { NomeTecnologia } from "../../constants/NOME_TECNOLOGIAS";
 import { MODALIDADE_CURSOS } from "../../constants/MODALIDADE_CURSOS";
+import { AllTecnologies } from "../Tecnologies";
 
 
 export const certificadosMock = [
@@ -11,7 +12,8 @@ export const certificadosMock = [
     modalidade: MODALIDADE_CURSOS.PRESENCIAL,
     localizacao: "UNA - Aimorés",
     descricao: "Formação acadêmica robusta em Ciência da Computação com ênfase no desenvolvimento e gestão de soluções tecnológicas inovadoras. O currículo forneceu uma base sólida em Engenharia de Software, Estrutura de Dados e Algoritmos.",
-    tecnologias: techsComputacao
+    tecnologias: AllTecnologies.filter(tech => 
+      (["Git", "Python", "GitHub", "MySQL", "Java"] as NomeTecnologia[]).includes(tech.nome))
   },
   {
     id: 2,
@@ -22,13 +24,7 @@ export const certificadosMock = [
     modalidade: MODALIDADE_CURSOS.PRESENCIAL,
     localizacao: "SENAI - CTTI",
     descricao: "Formação técnica em Desenvolvimento de Sistemas pelo SENAI, com foco na criação de soluções de software escaláveis e alinhadas às tecnologias utilizadas no mercado, proporcionando base sólida em lógica de programação, desenvolvimento de aplicações e boas práticas de engenharia de software.",
-    tecnologias: [
-        { nome: "Java", img: "/assets/svg/java.svg"},
-        { nome: "C++", img: "/assets/svg/cpp.svg"},
-        { nome: "SqlServer", img: "/assets/svg/sql-server.svg"},
-        { nome: "MySQL", img: "/assets/svg/mysql-icon-light.svg"},
-        { nome: "Git", img: "/assets/svg/git.svg"},
-        { nome: "GitHub", img: "/assets/svg/github_light.svg"}
-    ]
+    tecnologias: AllTecnologies.filter(tech => 
+      (["Git", "SqlServer", "C#", "C++", "Python", "GitHub", "MySQL", "Java"] as NomeTecnologia[]).includes(tech.nome))
   },
 ];
