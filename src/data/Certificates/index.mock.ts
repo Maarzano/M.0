@@ -1,9 +1,13 @@
 import type { NomeTecnologia } from "../../constants/NOME_TECNOLOGIAS";
 import { MODALIDADE_CURSOS } from "../../constants/MODALIDADE_CURSOS";
 import { AllTecnologies } from "../Tecnologies";
+import type { CardCertificadoProps } from "../../components/Cards/CardCertificado";
 
+interface ICard extends CardCertificadoProps {
+  id: number
+}
 
-export const certificadosMock = [
+export const certificadosMock: ICard[] = [
   {
     id: 1,
     titulo: "Ciência da Computação",
@@ -25,6 +29,6 @@ export const certificadosMock = [
     localizacao: "SENAI - CTTI",
     descricao: "Formação técnica em Desenvolvimento de Sistemas pelo SENAI, com foco na criação de soluções de software escaláveis e alinhadas às tecnologias utilizadas no mercado, proporcionando base sólida em lógica de programação, desenvolvimento de aplicações e boas práticas de engenharia de software.",
     tecnologias: AllTecnologies.filter(tech => 
-      (["Git", "SqlServer", "C#", "C++", "Python", "GitHub", "MySQL", "Java"] as NomeTecnologia[]).includes(tech.nome))
+      (["Git", "SqlServer", "C++", "Python", "GitHub", "MySQL", "Java"] as NomeTecnologia[]).includes(tech.nome))
   },
 ];

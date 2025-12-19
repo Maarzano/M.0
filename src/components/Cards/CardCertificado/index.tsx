@@ -10,7 +10,7 @@ import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localiz
 import LogoLoop, { type LogoItem } from '../../LogoLoop';
 import ToolTipTab from '../../ToolTip';
 
-interface CardCertificadoProps {
+export interface CardCertificadoProps {
     img: IImg;
     titulo: string;
     dataInicio: Date;
