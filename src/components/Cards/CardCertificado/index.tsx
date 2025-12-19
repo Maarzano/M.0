@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
+import { MODALIDADE_CURSOS, type Modalidades } from "../../../constants/MODALIDADE_CURSOS";
 import type { IImg } from "../../../Types/IImg";
 import type { ITecnologia } from "../../../Types/ITecnologia";
 import { formatarDataMesAno } from "../../../utils/Datas";
@@ -15,7 +15,7 @@ interface CardCertificadoProps {
     titulo: string;
     dataInicio: Date;
     dataFinal?: Date;
-    modalidade?: EModalidadeCurso;
+    modalidade?: Modalidades;
     localizacao?: string;
     descricao: string;
     tecnologias: ITecnologia[]
@@ -27,14 +27,14 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
     titulo = "Curso sem Nome",
     dataInicio = new Date("06/01/2025"),
     dataFinal,
-    modalidade = EModalidadeCurso.ONLINE,
+    modalidade = MODALIDADE_CURSOS.ONLINE,
     localizacao,
     descricao = PlaceHolderDescricaoCertificado,
     tecnologias = []
 }) => {
 
     const iconSrc =
-        modalidade === EModalidadeCurso.PRESENCIAL
+        modalidade === MODALIDADE_CURSOS.PRESENCIAL
             ? "/public/assets/svg/presencialIcon.svg"
             : "/public/assets/svg/OnlineIcon.svg";
 
@@ -110,7 +110,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                     <img src={iconSrc} alt="Ícone modalidade" />
                     {modalidade.toString()}
                 </Modalidade>
-                {modalidade !== EModalidadeCurso.ONLINE && (
+                {modalidade !== MODALIDADE_CURSOS.ONLINE && (
                     <LocalizacaoContainer>
                         <img src="/public/assets/svg/localizaçãoIcon.svg" alt="Localização" />
                         {localizacao}
