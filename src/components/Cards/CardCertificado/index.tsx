@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo } from 'react';
-import { EModalidadeCurso } from "../../../Types/EModalidadeCurso";
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { MODALIDADE_CURSOS, type Modalidades } from "../../../constants/MODALIDADE_CURSOS";
 import type { IImg } from "../../../Types/IImg";
 import type { ITecnologia } from "../../../Types/ITecnologia";
 import { formatarDataMesAno } from "../../../utils/Datas";
 import { PlaceHolderDescricaoCertificado } from "./PlaceHolderDescricaoCertificado";
 import { DataInicioFim, DivDescricao, DivImg, DivLogoLoop, DivModalidade_Localização, Expandir, LocalizacaoContainer, Modalidade, TituloCertificado, Wrapper } from "./styles";
 import LogoLoop, { type LogoItem } from '../../LogoLoop';
+import ToolTipTab from '../../ToolTip';
 
-interface CardCertificadoProps {
+export interface CardCertificadoProps {
     img: IImg;
     titulo: string;
     dataInicio: Date;
     dataFinal?: Date;
-    modalidade?: EModalidadeCurso;
+    modalidade?: Modalidades;
     localizacao?: string;
     descricao: string;
     tecnologias: ITecnologia[]
@@ -26,14 +27,14 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
     titulo = "Curso sem Nome",
     dataInicio = new Date("06/01/2025"),
     dataFinal,
-    modalidade = EModalidadeCurso.ONLINE,
+    modalidade = MODALIDADE_CURSOS.ONLINE,
     localizacao,
     descricao = PlaceHolderDescricaoCertificado,
     tecnologias = []
 }) => {
 
     const iconSrc =
-        modalidade === EModalidadeCurso.PRESENCIAL
+        modalidade === MODALIDADE_CURSOS.PRESENCIAL
             ? "/public/assets/svg/presencialIcon.svg"
             : "/public/assets/svg/OnlineIcon.svg";
 
@@ -42,8 +43,53 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
             src: tech.img,
             alt: tech.nome,
             title: tech.nome,
+            href: tech.link,
         }));
     }, [tecnologias]);
+
+    const renderTechItem = (item: LogoItem) => {
+        const img = (
+            <img 
+                src={(item as any).src} 
+                alt={(item as any).alt} 
+                draggable={false}
+            />
+        );
+
+        const withTooltip = (
+            <ToolTipTab label={(item as any).title || ''} direction={"90px"}>
+                {img}
+            </ToolTipTab>
+        );
+
+        return (item as any).href ? (
+            <a 
+                href={(item as any).href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="logoloop__link" 
+                draggable={false}
+            >
+                {withTooltip}
+            </a>
+        ) : withTooltip;
+    };
+
+    const tituloRef = useRef<HTMLHeadingElement>(null);
+    
+    const [linhasDescricao, setLinhasDescricao] = useState(3);
+
+    useLayoutEffect(() => {
+        if (tituloRef.current) {
+            const alturaTitulo = tituloRef.current.clientHeight;
+
+            if (alturaTitulo > 60) {
+                setLinhasDescricao(4);
+            } else {
+                setLinhasDescricao(5);
+            }
+        }
+    }, [titulo]);
 
     return (
         <Wrapper className="cursor-target">
@@ -51,7 +97,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                 <img src={img.imgSrc} alt={titulo} />
             </DivImg>
             
-            <TituloCertificado>
+            <TituloCertificado ref={tituloRef}>
                 {titulo}
             </TituloCertificado>
             
@@ -64,7 +110,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                     <img src={iconSrc} alt="Ícone modalidade" />
                     {modalidade.toString()}
                 </Modalidade>
-                {modalidade !== EModalidadeCurso.ONLINE && (
+                {modalidade !== MODALIDADE_CURSOS.ONLINE && (
                     <LocalizacaoContainer>
                         <img src="/public/assets/svg/localizaçãoIcon.svg" alt="Localização" />
                         {localizacao}
@@ -72,7 +118,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                 )}
             </DivModalidade_Localização>
             
-            <DivDescricao>
+            <DivDescricao $linhas={linhasDescricao}>
                 {descricao.toString()}
             </DivDescricao>
 
@@ -90,6 +136,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                         fadeOutColor='#1B1A1C'
                         ariaLabel="Tecnologias utilizadas"
                         draggable
+                        renderItem={renderTechItem}
                     />
                 </DivLogoLoop>
             )}

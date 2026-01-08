@@ -300,6 +300,14 @@ export const LogoLoop = React.memo<LogoLoopProps>(
 
     const renderLogoItem = useCallback(
       (item: LogoItem, key: React.Key) => {
+        if (renderItem) {
+          return (
+            <li className="logoloop__item" key={key} role="listitem">
+              {renderItem(item, key)}
+            </li>
+          );
+        }
+
         const isNodeItem = 'node' in item;
         const content = isNodeItem ? (
           <span className="logoloop__node">{(item as any).node}</span>

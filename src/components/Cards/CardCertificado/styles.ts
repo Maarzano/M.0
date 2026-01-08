@@ -7,9 +7,13 @@ export const Wrapper = styled.div`
     background-color: ${props => props.theme.colors.background2};
     padding: 0.78rem;
     overflow: hidden;
+
+    display: flex;
+    flex-direction: column; 
+
     &:hover {
         .Expandir {
-            color: ${props => props.theme.colors.textToB1};;
+            color: ${props => props.theme.colors.textToB1};
             transform: scale(1.05);
         }
 
@@ -28,6 +32,7 @@ export const DivImg = styled.div<{ $background?: string }>`
     height: 35%;
     background-color: ${props => props.$background};
     border-radius: 3rem;
+    flex-shrink: 0;
 
     img {
         height: 100%;
@@ -40,11 +45,13 @@ export const TituloCertificado = styled.h2`
     margin: 0.5rem 0 0.7rem 2rem;
     font-size: 3rem;
     font-weight: 900;
+    flex-shrink: 0;
 `
 
 export const DataInicioFim = styled.p`
     text-align: end;
     color: ${props => props.theme.colors.cinzaSecundario};
+    flex-shrink: 0;
 `
 
 export const DivModalidade_Localização = styled.div`
@@ -53,6 +60,7 @@ export const DivModalidade_Localização = styled.div`
     gap: 0.7rem;
     margin-left: 1.3rem;
     margin-top: 0.5rem;
+    flex-shrink: 0;
 `
 
 export const Modalidade = styled.div`
@@ -70,20 +78,30 @@ export const Modalidade = styled.div`
 `
 export const LocalizacaoContainer = Modalidade;
 
-export const DivDescricao = styled.div`
-    overflow-y: hidden;
-    overflow-x: auto;
+export const DivDescricao = styled.div<{ $linhas: number }>`
+    display: -webkit-box;
+    -webkit-line-clamp: ${props => props.$linhas};
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
     text-align: left;
-    margin: 1.5rem 2rem 1rem 2rem;
+    margin: 1.5rem 2rem 0 2rem;
     font-size: 2rem;
+    line-height: 1.3;
     color: ${props => props.theme.colors.cinzaSecundario};
 `
 
 export const DivLogoLoop = styled.div`
-    margin-top: auto;
+    margin-top: auto; 
+    
     padding-top: 16px;
+    padding-bottom: 120px;
+    margin-bottom: -120px;
     width: 100%;
     overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
 `
 
 export const Expandir = styled.div`
@@ -95,10 +113,12 @@ export const Expandir = styled.div`
     
     width: 100%;
     padding-right: 1.5rem;
-    margin-top: 2.5rem; 
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
 
     font-size: 1.9rem;
     color: ${props => props.theme.colors.cinzaSecundario};
+    flex-shrink: 0;
 
     img {
         width: 2.2rem;
