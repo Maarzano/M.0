@@ -11,7 +11,7 @@ export const certificadosMock: ICard[] = [
   {
     id: 1,
     titulo: "Ciência da Computação",
-    img: { imgSrc: "public/assets/imgs/unaIconQuadradovermelho.png", background: "#E60026" },
+    img: { imgSrc: "/assets/imgs/unaIconQuadradoVermelho.png", background: "#E60026" },
     dataInicio: new Date("05/21/2025"),
     modalidade: MODALIDADE_CURSOS.PRESENCIAL,
     localizacao: "UNA - Aimorés",

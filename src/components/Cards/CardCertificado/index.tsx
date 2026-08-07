@@ -22,7 +22,7 @@ export interface CardCertificadoProps {
 }
 const CardCertificado: React.FC<CardCertificadoProps> = ({
     img = { 
-        imgSrc: "/public/assets/imgs/PlaceHolderImg1WHITE.png",
+        imgSrc: "/assets/imgs/PlaceHolderImg1WHITE.png",
     },
     titulo = "Curso sem Nome",
     dataInicio = new Date("06/01/2025"),
@@ -35,8 +35,8 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
 
     const iconSrc =
         modalidade === MODALIDADE_CURSOS.PRESENCIAL
-            ? "/public/assets/svg/presencialIcon.svg"
-            : "/public/assets/svg/OnlineIcon.svg";
+            ? "/assets/svg/presencialIcon.svg"
+            : "/assets/svg/OnlineIcon.svg";
 
     const techLogos: LogoItem[] = useMemo(() => {
         return tecnologias.map((tech) => ({
@@ -112,7 +112,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
                 </Modalidade>
                 {modalidade !== MODALIDADE_CURSOS.ONLINE && (
                     <LocalizacaoContainer>
-                        <img src="/public/assets/svg/localizaçãoIcon.svg" alt="Localização" />
+                        <img src="/assets/svg/localizaçãoIcon.svg" alt="Localização" />
                         {localizacao}
                     </LocalizacaoContainer>
                 )}
@@ -143,7 +143,7 @@ const CardCertificado: React.FC<CardCertificadoProps> = ({
 
             <Expandir className='Expandir'>
                 Expandir
-                <img src='/public/assets/svg/arrow.svg'/>
+                <img src='/assets/svg/arrow.svg'/>
             </Expandir>
         </Wrapper>
     );
