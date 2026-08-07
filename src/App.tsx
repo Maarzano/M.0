@@ -2,13 +2,14 @@ import styled, { ThemeProvider } from "styled-components"
 import { defaultTheme } from "./styles/theme"
 import { GlobalStyle } from "./styles/GlobalStyle"
 
-import Index from "./Pages/Sobre/Index/Index" 
+import Index from "./Pages/Sobre/Index/Index"
 import FraseDia from "./Pages/Sobre/FraseDia"
 import Apresentação from "./Pages/Sobre/Apresentação"
 import TargetCursor from "./components/TargetCursor"
 import FormacaoCertificado from "./Pages/Sobre/FormaçãoCertificados"
 import BarraNavegacao from "./layout/Navegacao/BarraNavegacao"
 import { indicesData } from "./data/indices/indices"
+import Linha from "./components/Linha"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <TargetCursor spinDuration={2}
                     hideDefaultCursor={true}
                     parallaxOn={false}/>
+      <Linha/>
       <Wrapper>
         <BarraNavegacao itens={indicesData}/>
         <Index/>
