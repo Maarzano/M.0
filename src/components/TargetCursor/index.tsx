@@ -49,9 +49,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   useEffect(() => {
     if (isMobile || !cursorRef.current) return;
 
-    const originalCursor = document.body.style.cursor;
+    const root = document.documentElement;
     if (hideDefaultCursor) {
-      document.body.style.cursor = 'none';
+      root.setAttribute('data-custom-cursor', 'true');
     }
 
     const cursor = cursorRef.current;
@@ -262,7 +262,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         cleanupTarget(activeTarget);
       }
       spinTl.current?.kill();
-      document.body.style.cursor = originalCursor;
+      root.removeAttribute('data-custom-cursor');
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
       activeStrengthRef.current.current = 0;

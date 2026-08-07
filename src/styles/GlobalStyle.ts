@@ -41,4 +41,15 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         border: none;
     }
+
+  /*
+   * Enquanto o TargetCursor esta ativo, nenhum elemento pode mostrar o cursor
+   * nativo. Precisa de !important porque concorre com regras de elemento
+   * (button, .cursor-target) e com estilos inline que o Lanyard escreve em
+   * document.body.style.cursor ao arrastar o crachá.
+   */
+  html[data-custom-cursor='true'],
+  html[data-custom-cursor='true'] * {
+    cursor: none !important;
+  }
 `;
