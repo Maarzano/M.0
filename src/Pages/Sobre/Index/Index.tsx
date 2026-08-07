@@ -1,15 +1,20 @@
-import ScrollIcon from "../../../components/ScrollIcon";
-import { Separação, Wrapper } from "./styles";
+import Lanyard from '../../../Components/Lanyard'
+import Lanyard2 from '../../../Components/Lanyard2';
+import ScrollIcon from "../../../Components/ScrollIcon";
+import { Separação, Wrapper, LanyardWrapper } from "./styles";
 
 const Index = () => {
     return (
         <>
+        
         <Wrapper>
             <Separação>
-                <h1>Teste</h1>
+                <h1>TESTE</h1>
             </Separação>
             <Separação>
-                <p>dasdasda</p>
+                <LanyardWrapper>
+                    <Lanyard2 fov={18}/>
+                </LanyardWrapper>
             </Separação>
             <ScrollIcon/>
         </Wrapper>
