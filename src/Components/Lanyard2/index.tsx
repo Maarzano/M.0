@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei'
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier'
@@ -9,9 +9,36 @@ extend({ MeshLineGeometry, MeshLineMaterial })
 useGLTF.preload('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/5huRVDzcoDwnbgrKUo1Lzs/53b6dd7d6b4ffcdbd338fa60265949e1/tag.glb')
 useTexture.preload('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/SOT1hmCesOHxEYxL7vkoZ/c57b29c85912047c414311723320c16b/band.jpg')
 
-export default function Lanyard2({ fov = 25, zoom = 13, transparent = true }) {
+/**
+ * Enquadra o card na fração horizontal pedida (0 = esquerda, 1 = direita).
+ *
+ * Desloca a câmera em vez de mover o <group> da corda: o rapier lê a transform
+ * do pai uma vez, no mount, para calcular a posição de mundo dos corpos — mover
+ * o group depois disso reposicionaria só o desenho, e a física continuaria no
+ * lugar antigo. Mexer na câmera não toca em nada da simulação, e o arrasto
+ * continua correto porque ele desprojeta usando state.camera.
+ *
+ * Recalcula a cada resize: a largura visível depende do aspect, então um valor
+ * fixo em unidades de mundo escorregaria conforme a janela muda.
+ */
+function EnquadraCard({ fracaoHorizontal, fov, distancia }: { fracaoHorizontal: number; fov: number; distancia: number }) {
+  const camera = useThree((state) => state.camera)
+  const size = useThree((state) => state.size)
+
+  useLayoutEffect(() => {
+    const alturaVisivel = 2 * Math.tan((fov * Math.PI) / 360) * distancia
+    const larguraVisivel = alturaVisivel * (size.width / size.height)
+    camera.position.x = -(fracaoHorizontal - 0.5) * larguraVisivel
+    camera.updateProjectionMatrix()
+  }, [camera, size.width, size.height, fracaoHorizontal, fov, distancia])
+
+  return null
+}
+
+export default function Lanyard2({ fov = 25, zoom = 13, transparent = true, fracaoHorizontal = 0.72 }) {
   return (
     <Canvas camera={{ position: [0, 0, zoom], fov: fov }} gl={{ alpha: true }} onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}>
+      <EnquadraCard fracaoHorizontal={fracaoHorizontal} fov={fov} distancia={zoom} />
       <ambientLight intensity={Math.PI} />
       <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
         <Band />

@@ -18,9 +18,11 @@ function App() {
       <TargetCursor spinDuration={2}
                     hideDefaultCursor={true}
                     parallaxOn={false}/>
-      <Linha/>
       <Wrapper>
         <BarraNavegacao itens={indicesData}/>
+        {/* Fora do hero de propósito: o trilho desce até o fim do documento,
+            atravessando todas as seções, e só o Wrapper tem essa altura. */}
+        <Linha/>
         <Index/>
         <FraseDia/>
         <Apresentação/>
@@ -34,6 +36,9 @@ function App() {
 const Wrapper = styled.div`
   width: 95vw;
   margin: 2rem auto 2rem auto;
+  /* Bloco de contenção da Linha: é o único elemento com a altura de todas as
+     seções somadas, então é ele que faz o trilho chegar ao fim da página. */
+  position: relative;
 `
 const Temp = styled.div`
   width: 100%;

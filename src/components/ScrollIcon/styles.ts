@@ -5,6 +5,8 @@ export const StyledWrapper = styled.div`
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
+    /* acima do canvas do Lanyard, senao perde o hover do cursor-target */
+    z-index: 2;
   .scrolldown {
     --color: ${props => props.theme.colors.primary};
     --sizeX: 30px;

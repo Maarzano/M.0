@@ -1,25 +1,17 @@
-import Lanyard from '../../../Components/Lanyard'
 import Lanyard2 from '../../../Components/Lanyard2';
-import ScrollIcon from "../../../Components/ScrollIcon";
-import { Separação, Wrapper, LanyardWrapper } from "./styles";
+import ScrollIcon from "../../../components/ScrollIcon";
+import { LanyardWrapper, Logo, Wrapper } from "./styles";
 
 const Index = () => {
     return (
-        <>
-        
         <Wrapper>
-            <Separação>
-                <h1>TESTE</h1>
-            </Separação>
-            <Separação>
-                <LanyardWrapper>
-                    <Lanyard2 fov={18}/>
-                </LanyardWrapper>
-            </Separação>
+            <Logo>M.0</Logo>
+            <LanyardWrapper>
+                {/* fov 21 deixa o card ocupando ~46% da altura, como no Figma */}
+                <Lanyard2 fov={21}/>
+            </LanyardWrapper>
             <ScrollIcon/>
         </Wrapper>
-        
-        </>
     )
 }
 
