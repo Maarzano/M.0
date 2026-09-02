@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePrefereMenosMovimento } from "../../hooks/usePrefereMenosMovimento";
 
 export interface OpcoesMaquinaDeEscrever {
   /**
@@ -15,21 +16,6 @@ export interface OpcoesMaquinaDeEscrever {
   pausaNoFim?: number;
   /** Pausa com a linha vazia, antes de digitar a próxima. */
   pausaEntreFrases?: number;
-}
-
-function usePrefereMenosMovimento(): boolean {
-  const [prefere, setPrefere] = useState(
-    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-
-  useEffect(() => {
-    const consulta = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const aoMudar = (evento: MediaQueryListEvent) => setPrefere(evento.matches);
-    consulta.addEventListener("change", aoMudar);
-    return () => consulta.removeEventListener("change", aoMudar);
-  }, []);
-
-  return prefere;
 }
 
 /**

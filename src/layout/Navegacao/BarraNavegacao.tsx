@@ -8,7 +8,7 @@ interface BarraNavegacaoProps {
 
 const BarraNavegacao= ({itens}: BarraNavegacaoProps) => {
     return (
-        <NavContainer>
+        <NavContainer data-nav>
             {itens.map((item) => {
                 const Icone = item.icon;
                 return (

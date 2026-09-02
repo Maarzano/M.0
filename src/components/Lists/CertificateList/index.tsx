@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useCertificados } from "../../../hooks/useCertificados";
 import { 
@@ -66,15 +67,25 @@ const CertificateList = () => {
     return POSITIONS.hidden;
   };
 
+  /*
+   * `loading` entra nas dependências porque os cards só existem no DOM depois
+   * dele virar false. Sem isso este efeito rodava uma única vez, com o
+   * carrossel ainda não montado, e os cards nasciam empilhados no centro — sem
+   * xPercent, sem escala e sem opacidade.
+   */
   useGSAP(() => {
-    if (!data || data.length === 0) return;
+    if (loading || !data || data.length === 0) return;
     const total = data.length;
 
     cardsRef.current = cardsRef.current.slice(0, total);
 
+    let posicionou = false;
+
     data.forEach((_, i) => {
       const card = cardsRef.current[i];
       if (!card) return;
+
+      posicionou = true;
 
       const state = getCardState(i, total, currentIndex);
 
@@ -94,9 +105,21 @@ const CertificateList = () => {
       }
     });
 
+    // Só consome a primeira renderização quando de fato havia card para pôr no
+    // lugar: a posição inicial precisa ser instantânea, não animada.
+    if (!posicionou) return;
+
+    if (isFirstRender.current) {
+      /*
+       * A troca do bloco de carregando pelo carrossel muda a altura da seção,
+       * e todos os ScrollTriggers da página foram medidos antes disso.
+       */
+      ScrollTrigger.refresh();
+    }
+
     isFirstRender.current = false;
 
-  }, { dependencies: [currentIndex, data], scope: containerRef });
+  }, { dependencies: [currentIndex, data, loading], scope: containerRef });
 
   if (loading) {
      return (

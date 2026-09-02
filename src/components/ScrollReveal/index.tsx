@@ -75,30 +75,19 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
     const charElements = el.querySelectorAll<HTMLElement>('.char');
 
-    gsap.fromTo(
-      charElements,
-      { opacity: baseOpacity, willChange: 'opacity' },
-      {
-        ease: 'none',
-        opacity: 1,
-        stagger: stagger,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: wordAnimationStart,
-          end: computedEnd,
-          scrub: true
-        }
-      }
-    );
-
-    if (enableBlur) {
+    /*
+     * gsap.context() prende tudo o que for criado aqui dentro a este
+     * componente: no cleanup, .revert() mata só os ScrollTriggers deste
+     * bloco de texto. Matar ScrollTrigger.getAll() derrubaria também a
+     * timeline do palco fixo e o registro de sessão de todas as seções.
+     */
+    const ctx = gsap.context(() => {
       gsap.fromTo(
         charElements,
-        { filter: `blur(${blurStrength}px)` },
+        { opacity: baseOpacity, willChange: 'opacity' },
         {
           ease: 'none',
-          filter: 'blur(0px)',
+          opacity: 1,
           stagger: stagger,
           scrollTrigger: {
             trigger: el,
@@ -109,11 +98,28 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           }
         }
       );
-    }
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+      if (enableBlur) {
+        gsap.fromTo(
+          charElements,
+          { filter: `blur(${blurStrength}px)` },
+          {
+            ease: 'none',
+            filter: 'blur(0px)',
+            stagger: stagger,
+            scrollTrigger: {
+              trigger: el,
+              scroller,
+              start: wordAnimationStart,
+              end: computedEnd,
+              scrub: true
+            }
+          }
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
   }, [scrollContainerRef, enableBlur, baseOpacity, wordAnimationEnd, wordAnimationStart, blurStrength, stagger, computedEnd]);
 
   return (

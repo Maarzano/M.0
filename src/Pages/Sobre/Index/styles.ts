@@ -18,17 +18,3 @@ export const LanyardWrapper = styled.div`
     inset: 0;
     z-index: 1;
 `
-
-/* Figma: x=13, y=13, 48px. Reduzido para 40px a pedido — fica fora da
-   escalaHero de propósito, para não acompanhar a coluna da esquerda. */
-export const Logo = styled.span`
-    position: absolute;
-    left: 1.3rem;
-    top: 1.3rem;
-    z-index: 2;
-    pointer-events: none;
-    font-family: ${(props) => props.theme.fonts.heading};
-    font-size: 4rem;
-    line-height: 1.27;
-    color: ${(props) => props.theme.colors.primary};
-`

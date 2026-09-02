@@ -6,7 +6,9 @@ export const defaultTheme = {
     textToB1: '#D9D3DB',
     textPlaceholder: '#3A393B',
     cinzaSecundario: '#626063',
-    textoContrastePrimario: '#130C15'
+    textoContrastePrimario: '#130C15',
+    /* Título de sessão no Figma é branco puro, não o textToB1. */
+    titulo: '#FFFFFF'
   },
   fonts: {
     main: '"Familjen Grotesk", sans-serif',

@@ -13,9 +13,15 @@ export const StyledH2 = styled.h2.attrs(props => ({
 export const StyledP = styled.p.attrs(props => ({
   className: `scroll-reveal-text ${props.className}`
 }))<{ size: string; textAlign: string; $showQuotes?: boolean }>`
+  /*
+   * A fonte precisa vir explícita: o container é um <h2>, e a regra global de
+   * heading joga Geist Mono em tudo que estiver dentro dele. O texto corrido
+   * do Figma é Familjen Grotesk regular.
+   */
+  font-family: ${props => props.theme.fonts.main};
   font-size: ${props => props.size};
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 400;
   text-align: ${props => props.textAlign};
   
   position: relative;
